@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.didi.dao.DepartmentMapper">
+
+    <select id="queryAllDepart" resultType="Department">
+        SELECT * from m_s.Department
+    </select>
+    
+    <select id="queryDepartById" resultType="Department">
+        SELECT * from m_s.Department
+        where D_ID = #{D_ID}
+    </select>
+    
+    <select id="queryDepartByName" resultType="Department">
+        SELECT * from m_s.Department where D_NAME = #{D_NAME}
+    </select>
+
+    <insert id="addDepart" parameterType="Department">
+        insert into m_s.Department(D_NAME, D_TYPE, D_TEL) 
+        values (#{D_NAME},#{D_TYPE},#{D_TEL})
+    </insert>
+    
+    <delete id="deleteDepartById" parameterType="int">
+        delete from m_s.Department where D_ID=#{D_ID}
+    </delete>
+    
+    <update id="updateDepart" parameterType="Department">
+        update m_s.Department
+        set D_NAME=#{D_NAME},D_TEL=#{D_TEL},D_TYPE=#{D_TYPE}
+        where D_ID = #{D_ID}
+    </update>
+    
+    <select id="queryDeStaff" resultType="Staff">
+        select S_ID,S_NAME,S_SEX,S_DEPARTMENTID,S_JOBID,S_EINFORMATION,S_PSOURCE,S_TEL,S_EMAIL,S_EDUCATION
+        from m_s.Staff
+        where S_DEPARTMENTID = #{D_ID}
+    </select>
+</mapper>

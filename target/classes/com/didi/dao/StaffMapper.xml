@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.didi.dao.StaffMapper">
+    
+    <select id="queryAllStaff" resultMap="Staffmation">
+        select S_ID, S_NAME, S_SEX, S_EINFORMATION, S_PSOURCE, S_TEL, S_EMAIL, S_EDUCATION,J_NAME,D_NAME
+        from m_s.Staff s,m_s.Department d,m_s.Job j
+        where s.S_JOBID=j.J_ID and s.S_DEPARTMENTID=d.D_ID
+    </select>
+    <resultMap id="Staffmation" type="Staff">
+        <result property="S_ID" column="S_ID"/>
+        <result property="S_NAME" column="S_NAME"/>
+        <result property="S_SEX" column="S_SEX"/>
+        <result property="S_EINFORMATION" column="S_EINFORMATION"/>
+        <result property="S_PSOURCE" column="S_PSOURCE"/>
+        <result property="S_TEL" column="S_TEL"/>
+        <result property="S_EMAIL" column="S_EMAIL"/>
+        <result property="S_EDUCATION" column="S_EDUCATION"/>
+        <association property="department" javaType="Department">
+            <result property="D_NAME" column="D_NAME"/>
+        </association>
+        <association property="job" javaType="Job">
+            <result property="J_NAME" column="J_NAME"/>
+        </association>
+    </resultMap>
+    
+    <insert id="addStaff" parameterType="Staff">
+        insert into m_s.Staff(S_NAME, S_SEX, S_DEPARTMENTID, S_JOBID, S_EINFORMATION, S_PSOURCE, S_TEL, S_EMAIL, S_EDUCATION)
+        VALUES(#{S_NAME},#{S_SEX},#{S_DEPARTMENTID},#{S_JOBID},#{S_EINFORMATION},#{S_PSOURCE},#{S_TEL},#{S_EMAIL},#{S_EDUCATION})
+    </insert>
+
+    <select id="listDeID" resultType="Integer">
+        select D_ID from m_s.Department
+    </select>
+    <select id="listDeName" resultType="String">
+        select D_NAME from m_s.Department
+    </select>
+    <select id="listJobID" resultType="Integer">
+        select J_ID from m_s.Job
+    </select>
+    <select id="listJobName" resultType="String">
+        select J_NAME from m_s.Job
+    </select>
+
+
+</mapper>

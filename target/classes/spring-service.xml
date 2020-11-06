@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 扫描service相关的bean -->
+    <context:component-scan base-package="com.didi.service" />
+
+    <!--DepartmentServiceImpl注入到IOC容器中-->
+    <bean id="DepartmentServiceImpl" class="com.didi.service.DepartmentServiceImpl">
+        <property name="departmentMapper" ref="departmentMapper"/>
+    </bean>
+    <bean id="JobServiceImpl" class="com.didi.service.JobServiceImpl">
+        <property name="jobMapper" ref="jobMapper"/>
+    </bean>
+    <bean id="StaffServiceImpl" class="com.didi.service.StaffServiceImpl">
+        <property name="staffMapper" ref="staffMapper"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+</beans>

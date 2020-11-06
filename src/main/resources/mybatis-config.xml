@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <package name="com.didi.pojo"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="com/didi/dao/DepartmentMapper.xml"/>
+        <mapper resource="com/didi/dao/JobMapper.xml"/>
+        <mapper resource="com/didi/dao/StaffMapper.xml"/>
+    </mappers>
+
+
+</configuration>
